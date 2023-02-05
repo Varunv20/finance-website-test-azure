@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Avg, Count
 from django.urls import reverse
 from django.utils import timezone
-from restaurant_review.models import Users, get_user_data, Restaurant, Review
+from restaurant_review.models import User, get_user_data, Restaurant, Review
 from django.contrib import messages
 import psycopg2
 from psycopg2 import Error
@@ -181,7 +181,7 @@ def sign_in(request):
     else:
         db_conn = db_connection()
         user1_data = user_data()
-        user1 = Users()
+        user1 = User()
         user1.name = username
         user1.street_address = password
         correct_sign_in = user1_data.verify_and_populate(db_conn, user1) 
@@ -190,14 +190,14 @@ def sign_in(request):
             return render(request, 'restaurant_review/add_restaurant.html', {
             'error_message': "Invalid Username Or Password",
         })
-        Users.save(user1)  
+        User.save(user1)  
         return HttpResponseRedirect(reverse('details', args=(user1.id,)))
 
     
 
 def create_account(request):
     try:
-        user1 = Users()
+        user1 = User()
         db_conn = db_connection()
         user1.username = username = request.POST['username']
         u_exists = username_exists(db_conn, username) 
@@ -232,7 +232,7 @@ def create_account(request):
 
         user1_data = user_data()
         user1_data.create_account(db_conn, user1)
-        Users.save(user1)  
+        User.save(user1)  
         return HttpResponseRedirect(reverse('details', args=(user1.id,)))
 
 @csrf_exempt

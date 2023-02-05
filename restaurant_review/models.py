@@ -19,7 +19,7 @@ class Review(models.Model):
     review_date = models.DateTimeField('review date')    
     def __str__(self):
         return self.restaurant.name + " (" + self.review_date.strftime("%x") +")"
-class user(models.Model):
+class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
 class get_user_data(models.Model):
