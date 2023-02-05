@@ -5,7 +5,7 @@ from django.db.models import Avg, Count
 from django.urls import reverse
 from django.utils import timezone
 
-from restaurant_review.models import Restaurant, Review
+from Financial_Website.models import Restaurant, Review
 
 # Create your views here.
 
