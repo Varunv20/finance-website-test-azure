@@ -4,8 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Avg, Count
 from django.urls import reverse
 from django.utils import timezone
-import database_funcs
-from restaurant_review.models import Users, get_user_data
+from restaurant_review.database_funcs import database_funcs
+from restaurant_review.models import Users, get_user_data, Restaurant, Review
 from django.contrib import messages
 # Create your views here.
 
