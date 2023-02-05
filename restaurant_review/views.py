@@ -4,9 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Avg, Count
 from django.urls import reverse
 from django.utils import timezone
-
-from restaurant_review.models import Restaurant, Review
-
+import database_funcs
+from restaurant_review.models import Users, get_user_data
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'restaurant_review/index.html', {'restaurants': restaurants })
 
 
-def details(request, id):
+def account_dashboard(request, id):
     print('Request for restaurant details page received')
 
     restaurant = get_object_or_404(Restaurant, pk=id)
@@ -33,25 +33,72 @@ def create_restaurant(request):
 
 
 @csrf_exempt
-def add_restaurant(request):
+def sign_in(request):
     try:
-        name = request.POST['restaurant_name']
-        street_address = request.POST['street_address']
-        description = request.POST['description']
+        username = request.POST['username']
+        password = request.POST['password']
+
     except (KeyError):
         # Redisplay the question voting form.
         return render(request, 'restaurant_review/add_restaurant.html', {
-            'error_message': "You must include a restaurant name, address, and description",
+            'error_message': "Invalid Username Or Password",
         })
     else:
-        restaurant = Restaurant()
-        restaurant.name = name
-        restaurant.street_address = street_address
-        restaurant.description = description
-        Restaurant.save(restaurant)
-                
-        return HttpResponseRedirect(reverse('details', args=(restaurant.id,)))
+        db_conn = database_funcs.db_connection()
+        user1_data = database_funcs.user_data()
+        user1 = Users()
+        user1.name = username
+        user1.street_address = password
+        correct_sign_in = user1_data.verify_and_populate(db_conn, user1) 
+        if not correct_sign_in:
+            messages.info(request, 'Invalid Username Or Password')
+            return render(request, 'restaurant_review/add_restaurant.html', {
+            'error_message': "Invalid Username Or Password",
+        })
+        Users.save(user1)  
+        return HttpResponseRedirect(reverse('details', args=(user1.id,)))
 
+    
+
+def create_account(request):
+    try:
+        user1 = Users()
+        db_conn = database_funcs.db_connection()
+        user1.username = username = request.POST['username']
+        u_exists = database_funcs.username_exists(db_conn, username) 
+        if u_exists:
+           messages.info(request, 'Username Taken')
+           return 
+        user1.UserID = database_funcs.create_id(db_conn) 
+        user1.password = request.POST['password']
+        user1.birth_date = request.POST['birth-date']
+        user1.phone_number = request.POST['phone']
+        user1.email = request.POST['email']
+        user1.f_name = request.POST['f_name']
+        user1.l_name = request.POST['l_name']
+        user1.city = request.POST['city']
+        user1.country = request.POST['country']
+        user1.account_balance = 0
+        user1.transactions = {}
+        user1.products_owned = {}
+        user1.payment_info = {}
+
+
+
+
+
+    except (KeyError):
+        messages.info(request, 'An Error Occured')
+
+        return render(request, 'restaurant_review/add_restaurant.html', {
+            'error_message': "Invalid Data",
+        })
+    else:
+
+        user1_data = database_funcs.user_data()
+        user1_data.create_account(db_conn, user1)
+        Users.save(user1)  
+        return HttpResponseRedirect(reverse('details', args=(user1.id,)))
 
 @csrf_exempt
 def add_review(request, id):
