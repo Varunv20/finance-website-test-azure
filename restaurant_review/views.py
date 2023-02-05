@@ -151,7 +151,7 @@ def index(request):
     return render(request, 'restaurant_review/index.html', {'restaurants': restaurants })
 
 
-def account_dashboard(request, id):
+def details(request, id):
     print('Request for restaurant details page received')
 
     restaurant = get_object_or_404(Restaurant, pk=id)
