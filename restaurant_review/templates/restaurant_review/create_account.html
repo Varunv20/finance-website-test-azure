@@ -1,0 +1,62 @@
+{% extends "restaurant_review/base.html" %}
+{% load restaurant_extras %}
+{% block title %}Restaurant Details{% endblock %}
+{% block head %}
+  {{ block.super }}
+  <style>
+    body {
+        min-height: 75rem;
+        padding-top: 4.5rem;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+    
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addReviewModal" tabindex="-1" aria-labelledby="addReviewModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addReviewModalLabel">Add Review</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+              <form method="POST" action="{% url 'create_account'%}">
+
+              <div class="modal-body">
+
+                <div class="mb-3">                        
+                    <label for="username" class="form-label fw-bold">Your name</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                    <label for="password" class="form-label fw-bold">Your name</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    <label class="form-label fw-bold">Rating</label>
+
+                  
+                      <label for="f_name" class="form-label fw-bold">First Name</label>
+                      <input type="text" class="form-control" id="f_name" name="f_name">
+                      <label for="l_name" class="form-label fw-bold">Last Name</label>
+                      <input type="text" class="form-control" id="l_name" name="l_name">
+                      <label for="email" class="form-label fw-bold">Email</label>
+                      <input type="text" class="form-control" id="email" name="email">
+                      <label for="phone" class="form-label fw-bold">Phone Number</label>
+                      <input type="number" class="form-control" id="phone" name="phone">
+                      <label for="city" class="form-label fw-bold">City</label>
+                      <input type="text" class="form-control" id="city" name="city">
+                      <label for="country" class="form-label fw-bold">Country</label>
+                      <input type="text" class="form-control" id="country" name="country">
+                      <label for="birth_date" class="form-label fw-bold">Birth Date</label>
+                      <input type="text" class="form-control" id="birth_date" name="birth_date">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+        </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
