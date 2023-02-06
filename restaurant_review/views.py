@@ -18,7 +18,7 @@ def index(request):
     return render(request, 'restaurant_review/index.html')
 
 
-def details(request, id):
+def create_signin_page(request, id):
     print('Request for restaurant details page received')
 
  
