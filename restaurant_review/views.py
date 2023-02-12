@@ -18,20 +18,18 @@ def index(request):
     return render(request, 'restaurant_review/index.html')
 
 
-def details(request, id):
-    print('Request for restaurant details page received')
-
-    restaurant = get_object_or_404(Restaurant, pk=id)
+def create_account_page(request, id):
+    print('Request for create account  page received')
 
 
-    return render(request, 'restaurant_review/details.html', {'restaurant': restaurant})
+    return render(request, 'restaurant_review/create_account.html')
 
 
 
-def create_account_page(request):
-    print('Request for add restaurant page received')
+def create_signin_page(request):
+    print('Request for add sign-in page received')
 
-    return render(request, 'restaurant_review/create_restaurant.html')
+    return render(request, 'restaurant_review/sign_in.html')
 
 def create_database(connection, query):
     cursor = connection.cursor()
