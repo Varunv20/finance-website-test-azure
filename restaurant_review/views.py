@@ -19,7 +19,7 @@ def index(request):
 
 
 def create_signin_page(request, id):
-    print('Request for restaurant details page received')
+    print('Request for signin page received')
 
  
 
@@ -27,7 +27,7 @@ def create_signin_page(request, id):
 
 
 
-def create_signin_page(request):
+def create_account_page(request):
     print('Request for add sign-in page received')
 
     return render(request, 'restaurant_review/create_account.html')
