@@ -14,22 +14,23 @@ import random
 def index(request):
     print('Request for index page received')
 
-    u = get_object_or_404(u, pk=id)
+   
     return render(request, 'restaurant_review/index.html')
 
 
-def create_account_page(request, id):
-    print('Request for create account  page received')
+def create_signin_page(request, id):
+    print('Request for restaurant details page received')
 
+ 
 
-    return render(request, 'restaurant_review/create_account.html')
+    return render(request, 'restaurant_review/sign_in.html')
 
 
 
 def create_signin_page(request):
     print('Request for add sign-in page received')
 
-    return render(request, 'restaurant_review/sign_in.html')
+    return render(request, 'restaurant_review/create_account.html')
 
 def create_database(connection, query):
     cursor = connection.cursor()
