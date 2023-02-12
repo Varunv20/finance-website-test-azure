@@ -224,7 +224,7 @@ def create_account(request):
         user1.transactions = {}
         user1.products_owned = {}
         user1.payment_info = {}
-
+        
 
 
 
@@ -232,13 +232,14 @@ def create_account(request):
     except (KeyError):
         messages.info(request, 'An Error Occured')
 
-        return render(request, 'restaurant_review/add_restaurant.html', {
+        return render(request, 'restaurant_review/index.html', {
             'error_message': "Invalid Data",
         })
     else:
 
         user1_data = user_data()
         user1_data.create_account(db_conn, user1)
-        User.save(user1)  
+        User.save(user1) 
+        print("account_created") 
         return HttpResponseRedirect(reverse('details', args=(user1.id,)))
 
