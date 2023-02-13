@@ -18,7 +18,7 @@ def index(request):
     return render(request, 'restaurant_review/index.html')
 
 
-def create_signin_page(request, id):
+def create_signin_page(request):
     print('Request for signin page received')
 
  
@@ -41,6 +41,7 @@ def create_database(connection, query):
         print(f"Error: '{err}'")
 
 def create_server_connection():
+     
     connection = None
     try:
         conn = psycopg2.connect(database=os.getenv("DBUSER"),
@@ -53,7 +54,7 @@ def create_server_connection():
                                   host=os.getenv("DBHOST"),
                                   port="5432",
                                   database="postgres_db")
-        print("MySQL Database connection successful")
+        print("Database connection successful")
     except Error as err:
         print(f"Error: '{err}'")
 
@@ -116,6 +117,7 @@ def create_id(conn):
 class db_connection:
     def __init__(self):
        self.connection = create_server_connection() 
+       print("connected to db")
     def create_table(self):
         table = """
         CREATE TABLE Users (
@@ -174,8 +176,8 @@ def create_restaurant(request):
     return render(request, 'restaurant_review/create_restaurant.html')
 
 
-@csrf_exempt
 def sign_in(request):
+    print("signing in")
     try:
         username = request.POST['username']
         password = request.POST['password']
@@ -204,8 +206,11 @@ def sign_in(request):
 
 def create_account(request):
     try:
+        print("creating account...")
+
         user1 = User()
         db_conn = db_connection()
+       
         user1.username = username = request.POST['username']
         u_exists = username_exists(db_conn, username) 
         if u_exists:
@@ -231,7 +236,7 @@ def create_account(request):
 
     except (KeyError):
         messages.info(request, 'An Error Occured')
-
+        print("an error occured while creating account")
         return render(request, 'restaurant_review/index.html', {
             'error_message': "Invalid Data",
         })
