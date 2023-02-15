@@ -7,6 +7,7 @@ from django.utils import timezone
 from restaurant_review.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
 import psycopg2
 from psycopg2 import Error
