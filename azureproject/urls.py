@@ -20,7 +20,6 @@ from django.urls import path, include
 from restaurant_review import views as user_view
 from django.contrib.auth import views as auth
 
-from .router import router
 
 urlpatterns = [
 
@@ -32,7 +31,7 @@ urlpatterns = [
     path('login/', user_view.Login, name='login'),
     path('logout/', auth.LogoutView.as_view(template_name='restaurant_review/index.html'), name='logout'),
     path('register/', user_view.register, name='register'),
-    path('profile', user_view.sign_in, name='sign_in'),
+ 
     path('dashboard', user_view.create_account, name='create_account'),
     path('', user_view.logout_view, name='logout'),
     path('password_reset/done/', auth.PasswordResetDoneView.as_view(template_name='main/password_reset_done.html'), name='password_reset_done'),
