@@ -1,13 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Avg, Count
 from django.urls import reverse
 from django.utils import timezone
-from restaurant_review.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
 
 import psycopg2
 from psycopg2 import Error
@@ -178,7 +175,7 @@ def create_restaurant(request):
     print('Request for add restaurant page received')
 
     return render(request, 'restaurant_review/create_restaurant.html')
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def login(request, user):
     
     return render(request, 'restaurant_review/dashboard.html')
