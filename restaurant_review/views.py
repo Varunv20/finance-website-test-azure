@@ -50,7 +50,7 @@ def register(request):
             msg.send()
             
             messages.success(request, f'Your account has been created ! You are now able to log in')
-            user1 = User.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password1'))
+            user1 = User_Model.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password1'))
        
        
             user1.password = form.cleaned_data.get('password1')
@@ -115,10 +115,8 @@ def password_reset_request(request):
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="main/password/password_reset.html", context={"password_reset_form":password_reset_form})
 def index(request):
-    print('Request for index page received')
+    return render(request, 'restaurant_review/index.html',{'title':'index'})
 
-   
-    return render(request, 'restaurant_review/index.html')
 
 def create_profile(request):
     print('Request for signin page received')
