@@ -50,10 +50,10 @@ def register(request):
             msg.send()
             
             messages.success(request, f'Your account has been created ! You are now able to log in')
-            user1 = User.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password'))
+            user1 = User.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password1'))
        
        
-            user1.password = form.cleaned_data.get('password')
+            user1.password = form.cleaned_data.get('password1')
             user1.birth_date = form.cleaned_data.get('birth-date')
             user1.phone_number =form.cleaned_data.get('phone')
             user1.first_name = form.cleaned_data.get('f_name')

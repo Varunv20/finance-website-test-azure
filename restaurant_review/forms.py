@@ -10,6 +10,10 @@ class UserRegisterForm(UserCreationForm):
     phone_no = forms.CharField(max_length = 20)
     first_name = forms.CharField(max_length = 20)
     last_name = forms.CharField(max_length = 20)
+    birth_date = forms.CharField(max_length=20)
+    city = forms.CharField(max_length=20)
+    country = forms.CharField(max_length=20)
+    
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone_no', 'password1', 'password2']
+        fields = ['username', 'email', 'phone_no', 'password1', 'password2','f_name','l_name', 'birth_date','city','country']
