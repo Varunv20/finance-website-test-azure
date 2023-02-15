@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import AbstractUser
 
 
-class User(AbstractUser):
+class User_Model(AbstractUser):
     UserID = models.IntegerField()
 
    

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 import psycopg2
 from psycopg2 import Error
 from django.contrib import admin
-from .models import User
+from .models import User_Model
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
