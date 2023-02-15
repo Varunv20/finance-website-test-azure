@@ -1,15 +1,11 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Avg, Count
-from django.urls import reverse
-from django.utils import timezone
+from django.http import HttpResponse
+
 from django.contrib import messages
 from django.contrib.auth import authenticate
 
 import psycopg2
 from psycopg2 import Error
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from .models import User
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
