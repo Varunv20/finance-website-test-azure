@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.utils import timezone
 from restaurant_review.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate
+
 import psycopg2
 from psycopg2 import Error
 from django.contrib import admin
@@ -16,7 +18,6 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
