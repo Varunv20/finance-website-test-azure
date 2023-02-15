@@ -32,7 +32,7 @@ urlpatterns = [
     path('logout/', auth.LogoutView.as_view(template_name='restaurant_review/index.html'), name='logout'),
     path('register/', user_view.register, name='register'),
  
-    path('dashboard', user_view.create_account, name='create_account'),
+    path('dashboard', user_view.Login, name='create_account'),
     path('', user_view.logout_view, name='logout'),
     path('password_reset/done/', auth.PasswordResetDoneView.as_view(template_name='main/password_reset_done.html'), name='password_reset_done'),
 
