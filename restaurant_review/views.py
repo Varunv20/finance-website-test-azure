@@ -56,8 +56,8 @@ def register(request):
             user1.password = form.cleaned_data.get('password1')
             user1.birth_date = form.cleaned_data.get('birth-date')
             user1.phone_number =form.cleaned_data.get('phone')
-            user1.first_name = form.cleaned_data.get('f_name')
-            user1.last_name = form.cleaned_data.get('l_name')
+            user1.first_name = form.cleaned_data.get('first_name')
+            user1.last_name = form.cleaned_data.get('last_name')
             user1.city = form.cleaned_data.get('city')
             user1.country = form.cleaned_data.get('country')
             user1.account_balance = 0
