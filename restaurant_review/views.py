@@ -8,6 +8,10 @@ from restaurant_review.models import User
 from django.contrib import messages
 import psycopg2
 from psycopg2 import Error
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import User
+
 import os
 import json 
 import random
@@ -17,13 +21,18 @@ def index(request):
    
     return render(request, 'restaurant_review/index.html')
 
+def create_profile(request):
+    print('Request for signin page received')
 
+ 
+
+    return render(request, 'restaurant_review/profile.html')
 def create_signin_page(request):
     print('Request for signin page received')
 
  
 
-    return render(request, 'restaurant_review/sign_in.html')
+    return render(request, 'restaurant_review/login.html')
 
 
 
@@ -208,21 +217,14 @@ def create_account(request):
     try:
         print("creating account...")
 
-        user1 = User()
-        db_conn = db_connection()
+        user1 = User.objects.create_user(request.POST['username'], request.POST['email'],  request.POST['password'])
        
-        user1.username = username = request.POST['username']
-        u_exists = username_exists(db_conn, username) 
-        if u_exists:
-           messages.info(request, 'Username Taken')
-           return 
-        user1.UserID = create_id(db_conn) 
+       
         user1.password = request.POST['password']
         user1.birth_date = request.POST['birth-date']
         user1.phone_number = request.POST['phone']
-        user1.email = request.POST['email']
-        user1.f_name = request.POST['f_name']
-        user1.l_name = request.POST['l_name']
+        user1.first_name = request.POST['f_name']
+        user1.last_name = request.POST['l_name']
         user1.city = request.POST['city']
         user1.country = request.POST['country']
         user1.account_balance = 0
@@ -242,9 +244,7 @@ def create_account(request):
         })
     else:
 
-        user1_data = user_data()
-        user1_data.create_account(db_conn, user1)
-        User.save(user1) 
+        user1.save() 
         print("account_created") 
         return HttpResponseRedirect(reverse('details', args=(user1.id,)))
 
