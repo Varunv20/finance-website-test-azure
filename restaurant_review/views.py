@@ -18,12 +18,75 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserRegisterForm
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 
 import os
 import json 
 import random
 
-
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            ######################### mail system ####################################
+            htmly = get_template('user/Email.html')
+            d = { 'username': username }
+            subject, from_email, to = 'Create Account', 'varunviges191@gmail.com', email
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            
+            messages.success(request, f'Your account has been created ! You are now able to log in')
+            user1 = User.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password'))
+       
+       
+            user1.password = form.cleaned_data.get('password')
+            user1.birth_date = form.cleaned_data.get('birth-date')
+            user1.phone_number =form.cleaned_data.get('phone')
+            user1.first_name = form.cleaned_data.get('f_name')
+            user1.last_name = form.cleaned_data.get('l_name')
+            user1.city = form.cleaned_data.get('city')
+            user1.country = form.cleaned_data.get('country')
+            user1.account_balance = 0
+            user1.transactions = {}
+            user1.products_owned = {}
+            user1.payment_info = {}
+            user1.save()
+            return redirect('/profile')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'user/register.html', {'form': form, 'title':'register here'})
+  
+################ login forms###################################################
+def Login(request):
+    if request.method == 'POST':
+  
+        # AuthenticationForm_can_also_be_used__
+  
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username = username, password = password)
+        if user is not None:
+            form = login(request, user)
+            messages.success(request, f' welcome {username} !!')
+            return redirect('index')
+        else:
+            messages.info(request, f'account done not exit plz sign in')
+    form = AuthenticationForm()
+    return render(request, 'user/login.html', {'form':form, 'title':'log in'})
 def password_reset_request(request):
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)
@@ -45,7 +108,7 @@ def password_reset_request(request):
 					}
 					email = render_to_string(email_template_name, c)
 					try:
-						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+						send_mail(subject, email, 'varunviges191@gmail.com' , [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
 					return redirect ("/password_reset/done/")
