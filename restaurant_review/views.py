@@ -183,33 +183,28 @@ def create_restaurant(request):
     print('Request for add restaurant page received')
 
     return render(request, 'restaurant_review/create_restaurant.html')
-
-
+def login(request, user):
+    
+    return render(request, 'restaurant_review/dashboard.html')
 def sign_in(request):
     print("signing in")
     try:
         username = request.POST['username']
         password = request.POST['password']
-
-    except (KeyError):
-        # Redisplay the question voting form.
-        return render(request, 'restaurant_review/add_restaurant.html', {
-            'error_message': "Invalid Username Or Password",
-        })
-    else:
-        db_conn = db_connection()
-        user1_data = user_data()
-        user1 = User()
-        user1.name = username
-        user1.street_address = password
-        correct_sign_in = user1_data.verify_and_populate(db_conn, user1) 
-        if not correct_sign_in:
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+        else:
             messages.info(request, 'Invalid Username Or Password')
             return render(request, 'restaurant_review/add_restaurant.html', {
             'error_message': "Invalid Username Or Password",
+
+    except (KeyError):
+        # Redisplay the question voting form.
+        return render(request, 'restaurant_review/index.html', {
+            'error_message': "An Error Occured",
         })
-        User.save(user1)  
-        return HttpResponseRedirect(reverse('details', args=(user1.id,)))
+  
 
     
 
@@ -237,10 +232,10 @@ def create_account(request):
 
 
     except (KeyError):
-        messages.info(request, 'An Error Occured')
+        messages.info(request, 'Invalid Data')
         print("an error occured while creating account")
         return render(request, 'restaurant_review/index.html', {
-            'error_message': "Invalid Data",
+            'error_message': "An Error Occured",
         })
     else:
 
