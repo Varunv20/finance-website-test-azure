@@ -11,6 +11,7 @@ from psycopg2 import Error
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
+from django.contrib.auth import logout
 
 import os
 import json 
@@ -123,69 +124,27 @@ def create_id(conn):
         return id1 
     create_id(conn)
     
-class db_connection:
-    def __init__(self):
-       self.connection = create_server_connection() 
-       print("connected to db")
-    def create_table(self):
-        table = """
-        CREATE TABLE Users (
-            UserID int,
-            Username varchar(255),
-            Paswsword varchar(255),
-            LastName varchar(255),
-            FirstName varchar(255),
-            Location varchar(255),
-            PhoneNumber int,
-            AccountBalance money,
-            Transactions varchar(255),
-            Email varchar(255),
-            BirthDate varchar(255),
-            
-            ProductsOwned varchar(255),
-            PaymentInfo varchar(255)
-        );
-        """
-        self.execute_query(table)
-    def execute_query(self, query, values=None):
-        connection = self.connection
-        cursor = connection.cursor(buffered=True)
-        try:
-            if values == None:
-                cursor.execute(query)
-            else:
-                cursor.execute(query,values)
-            connection.commit()
-            print("Query successful")
-        except Error as err:
-            print(f"Error: '{err}'")
-
-    def read_query(self, query, values=None):
-        connection = self.connection
-        cursor = connection.cursor(buffered=True)
-        result = None
-        try:
-            if values == None:
-                cursor.execute(query)
-            else:
-                cursor.execute(query,values)
-            connection.commit()
-
-            result = cursor.fetchall()
-            return result
-        except Error as err:
-            print(f"Error: '{err}'")
 
 
 
 
+def logout_view(request):
+    logout(request)
+    return render(request, 'restaurant_review/index.html')
+    
 def create_restaurant(request):
     print('Request for add restaurant page received')
 
     return render(request, 'restaurant_review/create_restaurant.html')
+@login_required(login_url='/login')
 def login(request, user):
     
     return render(request, 'restaurant_review/dashboard.html')
+def reset_password(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    u = User.objects.get(username=username)
+    u.set_password("password")
 def sign_in(request):
     print("signing in")
     try:
@@ -196,8 +155,7 @@ def sign_in(request):
             login(request, user)
         else:
             messages.info(request, 'Invalid Username Or Password')
-            return render(request, 'restaurant_review/add_restaurant.html', {
-            'error_message': "Invalid Username Or Password",
+            
 
     except (KeyError):
         # Redisplay the question voting form.
@@ -240,6 +198,8 @@ def create_account(request):
     else:
 
         user1.save() 
-        print("account_created") 
-        return HttpResponseRedirect(reverse('details', args=(user1.id,)))
+        login(user1)
+        return
+        #print("account_created") 
+       # return HttpResponseRedirect(reverse('details', args=(user1.id,)))
 
