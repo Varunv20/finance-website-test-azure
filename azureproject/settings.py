@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
-#AUTH_USER_MODEL = "financial_app_test.User_Model" 
+AUTH_USER_MODEL = "financial_app_test.User_Model" 
 
 USE_I18N = True
 
