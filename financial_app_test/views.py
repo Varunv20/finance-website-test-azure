@@ -123,7 +123,7 @@ def index(request):
     print("request for index")
     print("request for index")
 
-    return render(request, 'financial_app_test/index.html')
+    return render(request, 'financial_app_test/base.html')
 
 
 def create_profile(request):
