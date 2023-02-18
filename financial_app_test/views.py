@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate
 
-import psycopg2
-from psycopg2 import Error
 from django.contrib import admin
 from .models import User_Model
 from django.contrib.auth import logout
@@ -116,7 +114,18 @@ def password_reset_request(request):
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="main/password/password_reset.html", context={"password_reset_form":password_reset_form})
 def index(request):
-    return render(request, 'financial_app_test/index.html')
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+    print("request for index.html")
+
+    return render(request, 'financial_app_test/base.html')
 
 
 def create_profile(request):
