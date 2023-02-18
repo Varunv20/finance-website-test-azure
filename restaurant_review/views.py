@@ -42,7 +42,7 @@ def register(request):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             ######################### mail system ####################################
-            htmly = get_template('user/Email.html')
+            htmly = get_template('restaurant_review/Email.html')
             d = { 'username': username }
             subject, from_email, to = 'Create Account', 'varunviges191@gmail.com', email
             html_content = htmly.render(d)

@@ -1,6 +1,6 @@
 
 from django import forms
-from django.contrib.auth.models import User
+from  .models import User_Model
 from django.contrib.auth.forms import UserCreationForm
  
  
@@ -15,5 +15,5 @@ class UserRegisterForm(UserCreationForm):
     country = forms.CharField(max_length=20)
     
     class Meta:
-        model = User
+        model = User_Model
         fields = ['username', 'email', 'phone_no', 'password1', 'password2','first_name','last_name', 'birth_date','city','country']
