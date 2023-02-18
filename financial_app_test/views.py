@@ -125,7 +125,7 @@ def index(request):
     print("request for index.html")
     print("request for index.html")
 
-    return render(request, 'financial_app_test/base.html')
+    return render(request, 'financial_app_test/index.html')
 
 
 def create_profile(request):
