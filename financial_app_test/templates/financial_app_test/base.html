@@ -36,7 +36,13 @@
       </nav>
 
       <main class="container">    
-        {% block content %}{% endblock %}
+        
+          <div class="d-flex justify-content-end">
+            <a href="{% url 'register' %}" class="btn btn-success px-4 gap-3">Register</a>
+        </div>
+        <div class="d-flex justify-content-end">
+        <a href="{% url 'login' %}" class="btn btn-success px-4 gap-3">signin</a>
+        </div>
       </main>
 
       <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>      
