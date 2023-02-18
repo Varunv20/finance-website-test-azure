@@ -24,6 +24,6 @@ urlpatterns = [
 
 
     #####user related path##########################
-    path('', include('restaurant_review.urls')),
+    path('', include('financial_app_test.urls')),
    
 ]

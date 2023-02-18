@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("restaurant_review", "0001_initial"),
+        ("financial_app_test", "0001_initial"),
     ]
 
     operations = [

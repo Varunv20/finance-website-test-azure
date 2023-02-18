@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('rating', models.IntegerField(validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(100)])),
                 ('review_text', models.CharField(max_length=500)),
                 ('review_date', models.DateTimeField(verbose_name='review date')),
-                ('restaurant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='restaurant_review.restaurant')),
+                ('restaurant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='financial_app_test.restaurant')),
             ],
         ),
     ]

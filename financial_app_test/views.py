@@ -42,7 +42,7 @@ def register(request):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             ######################### mail system ####################################
-            htmly = get_template('restaurant_review/Email.html')
+            htmly = get_template('financial_app_test/Email.html')
             d = { 'username': username }
             subject, from_email, to = 'Create Account', 'varunviges191@gmail.com', email
             html_content = htmly.render(d)
@@ -97,7 +97,7 @@ def password_reset_request(request):
 			if associated_users.exists():
 				for user in associated_users:
 					subject = "Password Reset Requested"
-					email_template_name = "restaurant_review/password_reset_email.txt"
+					email_template_name = "financial_app_test/password_reset_email.txt"
 					c = {
 					"email":user.email,
 					'domain':'https://msdocs-python-postgres-1ab.azurewebsites.net',
@@ -116,7 +116,7 @@ def password_reset_request(request):
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="main/password/password_reset.html", context={"password_reset_form":password_reset_form})
 def index(request):
-    return render(request, 'restaurant_review/index.html',{'title':'index'})
+    return render(request, 'financial_app_test/index.html',{'title':'index'})
 
 
 def create_profile(request):
@@ -124,20 +124,20 @@ def create_profile(request):
 
  
 
-    return render(request, 'restaurant_review/profile.html')
+    return render(request, 'financial_app_test/profile.html')
 def create_signin_page(request):
     print('Request for signin page received')
 
  
 
-    return render(request, 'restaurant_review/login.html')
+    return render(request, 'financial_app_test/login.html')
 
 
 
 def create_account_page(request):
     print('Request for add sign-in page received')
 
-    return render(request, 'restaurant_review/create_account.html')
+    return render(request, 'financial_app_test/create_account.html')
 
 def create_database(connection, query):
     cursor = connection.cursor()
@@ -227,16 +227,16 @@ def create_id(conn):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'restaurant_review/index.html')
+    return render(request, 'financial_app_test/index.html')
     
 def create_restaurant(request):
     print('Request for add restaurant page received')
 
-    return render(request, 'restaurant_review/create_restaurant.html')
+    return render(request, 'financial_app_test/create_restaurant.html')
 #@login_required(login_url='/login')
 def login(request, user):
     
-    return render(request, 'restaurant_review/dashboard.html')
+    return render(request, 'financial_app_test/dashboard.html')
 def reset_password(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -256,7 +256,7 @@ def sign_in(request):
 
     except (KeyError):
         # Redisplay the question voting form.
-        return render(request, 'restaurant_review/index.html', {
+        return render(request, 'financial_app_test/index.html', {
             'error_message': "An Error Occured",
         })
   
@@ -289,7 +289,7 @@ def create_account(request):
     except (KeyError):
         messages.info(request, 'Invalid Data')
         print("an error occured while creating account")
-        return render(request, 'restaurant_review/index.html', {
+        return render(request, 'financial_app_test/index.html', {
             'error_message': "An Error Occured",
         })
     else:
