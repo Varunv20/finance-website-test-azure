@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
-AUTH_USER_MODEL = "restaurant_review.User" 
+AUTH_USER_MODEL = "restaurant_review.User_Model" 
 
 USE_I18N = True
 
@@ -146,3 +146,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_HOST_USER = "varunviges191@gmail.com"
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+EMAIL_HOST_PASSWORD = "Karthik01!"

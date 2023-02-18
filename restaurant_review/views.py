@@ -34,6 +34,7 @@ import json
 import random
 
 def register(request):
+    print("request for register")
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
