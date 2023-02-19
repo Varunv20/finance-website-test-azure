@@ -18,8 +18,7 @@ class UserRegisterForm(UserCreationForm):
     city = forms.CharField(max_length=20)
     country = forms.CharField(max_length=20)
     
-    class Meta:
-        model = User_Model
+   
     def clean(self):
         cleaned_data = super(UserRegisterForm, self).clean()
         password = cleaned_data.get("password")
