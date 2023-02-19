@@ -5,7 +5,13 @@
 <div class="content-section col-md-8 col-md-offset-2">
   <form method="POST" style="border: 1px solid rgb(77, 132, 196); margin: 4%; padding:10%; border-radius:1%;">
     {% csrf_token %}
+    {{ form.subject.errors }}
+
     <fieldset class="form-group">
+      <div class="row">
+        <label for="{{ form.email_address.id_for_label }}">Email:</label>
+          {{form.email_address}}
+      </div>
       <div class="row">
         <label for="{{ form.username.id_for_label }}">Username:</label>
         {{form.username}}
@@ -30,10 +36,7 @@
           {{form.last_name}}
         </div>
       </div>
-      <div class="row">
-        <label for="{{ form.email_address.id_for_label }}">Email:</label>
-          {{form.email_address}}
-      </div>
+      
       <div class="row">
         <label for="{{ form.birth_date.id_for_label }}">Birth Date:</label>
 

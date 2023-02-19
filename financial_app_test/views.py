@@ -35,53 +35,51 @@ import random
 
 def register(request):
     print("request for register")
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            print(email)
-            ######################### mail system ####################################
-            htmly = get_template('financial_app_test/Email.html')
-            d = { 'username': username }
-            subject, from_email, to = 'Create Account', 'varunviges191@gmail.com', email
-            print("1")
-  
-  
-            html_content = htmly.render(d)
-            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            print("1")
+    
+    form = UserRegisterForm(request.POST)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
+        print(email)
+        ######################### mail system ####################################
+        htmly = get_template('financial_app_test/Email.html')
+        d = { 'username': username }
+        subject, from_email, to = 'Create Account', 'varunviges191@gmail.com', email
+        print("1")
 
-            msg.send()
-            print("1")
-            
-            messages.success(request, f'Your account has been created ! You are now able to log in')
-            print("1")
 
-            user1 = User_Model.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password1'))
-            print("2")
-       
-       
-            user1.password = form.cleaned_data.get('password1')
-            user1.birth_date = form.cleaned_data.get('birth-date')
-            user1.phone_number =form.cleaned_data.get('phone')
-            user1.first_name = form.cleaned_data.get('first_name')
-            user1.last_name = form.cleaned_data.get('last_name')
-            user1.city = form.cleaned_data.get('city')
-            user1.country = form.cleaned_data.get('country')
-            user1.account_balance = 0
-            user1.transactions = {}
-            user1.products_owned = {}
-            user1.payment_info = {}
-            user1.save()
-            print("3")
+        html_content = htmly.render(d)
+        msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        print("6786")
 
-            return redirect('/dashboard')
-    else:
-        form = UserRegisterForm()
-        print("f not")
+        msg.send()
+        print("35684")
+        
+        messages.success(request, f'Your account has been created ! You are now able to log in')
+        print("94773")
+
+        user1 = User_Model.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password1'))
+        print("2")
+    
+    
+        user1.password = form.cleaned_data.get('password1')
+        user1.birth_date = form.cleaned_data.get('birth-date')
+        user1.phone_number =form.cleaned_data.get('phone')
+        user1.first_name = form.cleaned_data.get('first_name')
+        user1.last_name = form.cleaned_data.get('last_name')
+        user1.city = form.cleaned_data.get('city')
+        user1.country = form.cleaned_data.get('country')
+        user1.account_balance = 0
+        user1.transactions = {}
+        user1.products_owned = {}
+        user1.payment_info = {}
+        user1.save()
+        print("3")
+
+        return redirect('/dashboard')
+
 
     return render(request, 'financial_app_test/register.html', {'form': form})
   
