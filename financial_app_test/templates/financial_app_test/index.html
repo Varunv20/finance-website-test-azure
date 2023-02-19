@@ -2,11 +2,11 @@
 
 {% extends 'financial_app_test/base.html' %}
 
-{% block mymessage %}
+{% block content %}
 <div class="d-flex justify-content-end">
-  <a class="btn btn-success  ">Register</a>
+  <a href="{% url 'register'%}" class="btn btn-success  ">Register</a>
 </div>
 <div class="d-flex justify-content-end">
-<a  class="btn btn-success">Log in</a>
+<a href="{% url 'login'%}" class="btn btn-success">Log in</a>
 </div>
 {% endblock %} 
