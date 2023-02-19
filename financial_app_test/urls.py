@@ -27,9 +27,9 @@ urlpatterns = [
 """
 urlpatterns = [
             path('', user_view.index, name='index'),
-            path('login/', user_view.Login, name='login'),
-            path('logout/', auth.LogoutView.as_view(template_name='financial_app_test/index.html'), name='logout'),
-            path('register/', user_view.register, name='register'),
+            path('login', user_view.Login, name='login'),
+            path('logout', auth.LogoutView.as_view(template_name='financial_app_test/index.html'), name='logout'),
+            path('register', user_view.register, name='register'),
         
             path('dashboard', user_view.Login, name='create_account'),
             path('', user_view.logout_view, name='logout'),
