@@ -41,17 +41,27 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
+            print(email)
             ######################### mail system ####################################
             htmly = get_template('financial_app_test/Email.html')
             d = { 'username': username }
             subject, from_email, to = 'Create Account', 'varunviges191@gmail.com', email
+            print("1")
+  
+  
             html_content = htmly.render(d)
             msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
+            print("1")
+
             msg.send()
+            print("1")
             
             messages.success(request, f'Your account has been created ! You are now able to log in')
+            print("1")
+
             user1 = User_Model.objects.create_user(form.cleaned_data.get('username'), form.cleaned_data.get('email'), form.cleaned_data.get('password1'))
+            print("2")
        
        
             user1.password = form.cleaned_data.get('password1')
@@ -66,9 +76,13 @@ def register(request):
             user1.products_owned = {}
             user1.payment_info = {}
             user1.save()
-            return redirect('/profile')
+            print("3")
+
+            return redirect('/dashboard')
     else:
         form = UserRegisterForm()
+        print("f not")
+
     return render(request, 'financial_app_test/register.html', {'form': form})
   
 ################ login forms###################################################
@@ -122,7 +136,6 @@ def index(request):
     print("request for index")
     print("request for index")
     print("request for index")
-
     return render(request, 'financial_app_test/index.html')
 
 

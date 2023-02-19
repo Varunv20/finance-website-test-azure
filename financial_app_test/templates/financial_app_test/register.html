@@ -3,41 +3,53 @@
 {% block content %}
 
 <div class="content-section col-md-8 col-md-offset-2">
-  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+  <form method="POST" style="border: 1px solid rgb(77, 132, 196); margin: 4%; padding:10%; border-radius:1%;">
     {% csrf_token %}
     <fieldset class="form-group">
       <div class="row">
+        <label for="{{ form.username.id_for_label }}">Username:</label>
         {{form.username}}
     </div>
     <div class="row">
       <div class="col-lg-6 col-md-12">
+        <label for="{{ form.password.id_for_label }}">Password:</label>
         {{form.password}}
       </div>
       <div class="col-lg-6 col-md-12">
+        <label for="{{ form.confirm_password.id_for_label }}">Confirm Password:</label>
         {{form.confirm_password}}
       </div>
     </div>
       <div class="row">
         <div class="col-lg-6 col-md-12">
+          <label for="{{ form.first_name.id_for_label }}">First Name:</label>
           {{form.first_name}}
         </div>
         <div class="col-lg-6 col-md-12">
+          <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
           {{form.last_name}}
         </div>
       </div>
       <div class="row">
+        <label for="{{ form.email_address.id_for_label }}">Email:</label>
           {{form.email_address}}
       </div>
       <div class="row">
+        <label for="{{ form.birth_date.id_for_label }}">Birth Date:</label>
+
           {{form.birth_date}}
       </div>
       <div class="row">
+        <label for="{{ form.phone_no.id_for_label }}">Phone Number:</label>
+
         {{form.phone_no}}
     </div>
     <div class="row">
+      <label for="{{ form.city.id_for_label }}">City/County:</label>
       {{form.city}}
   </div>
   <div class="row">
+    <label for="{{ form.country.id_for_label }}">Country:</label>
     {{form.country}}
 </div>
 
