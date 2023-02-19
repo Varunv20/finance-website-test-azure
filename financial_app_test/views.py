@@ -69,7 +69,7 @@ def register(request):
             return redirect('/profile')
     else:
         form = UserRegisterForm()
-    return render(request, 'user/register.html', {'form': form, 'title':'register here'})
+    return render(request, 'financial_app_test/register.html', {'form': form})
   
 ################ login forms###################################################
 def Login(request):
@@ -87,7 +87,7 @@ def Login(request):
         else:
             messages.info(request, f'account done not exit plz sign in')
     form = AuthenticationForm()
-    return render(request, 'user/login.html', {'form':form, 'title':'log in'})
+    return render(request, 'financial_app_test/login.html', {'form':form})
 def password_reset_request(request):
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)
@@ -123,7 +123,7 @@ def index(request):
     print("request for index")
     print("request for index")
 
-    return render(request, 'financial_app_test/base.html')
+    return render(request, 'financial_app_test/index.html')
 
 
 def create_profile(request):
