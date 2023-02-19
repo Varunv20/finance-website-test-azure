@@ -6,14 +6,26 @@ from django.contrib.auth.forms import UserCreationForm
  
  
 class UserRegisterForm(UserCreationForm):
+    username =forms.CharField(max_length = 20) 
+    password = forms.CharField(widget=forms.PasswordInput())
+    confirm_password=forms.CharField(widget=forms.PasswordInput())
+
     email = forms.EmailField()
-    phone_no = forms.CharField(max_length = 20)
+    phone_no = forms.IntegerField()
     first_name = forms.CharField(max_length = 20)
     last_name = forms.CharField(max_length = 20)
-    birth_date = forms.CharField(max_length=20)
+    birth_date = forms.DateField()
     city = forms.CharField(max_length=20)
     country = forms.CharField(max_length=20)
     
     class Meta:
         model = User_Model
-        fields = ['username', 'email', 'phone_no', 'password1', 'password2','first_name','last_name', 'birth_date','city','country']
+    def clean(self):
+        cleaned_data = super(UserRegisterForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError(
+                "password and confirm_password does not match"
+            )

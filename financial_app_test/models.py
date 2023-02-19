@@ -9,8 +9,8 @@ class User_Model(AbstractUser):
     UserID = models.IntegerField()
 
    
-    phone_number = models.CharField(max_length=20)
-    birth_date = models.CharField(max_length=20)
+    phone_number = models.IntegerField()
+    birth_date = models.DateField()
     city = models.CharField(max_length=20)
     country = models.CharField(max_length=20)
     transactions = models.JSONField()

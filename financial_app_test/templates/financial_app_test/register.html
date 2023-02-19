@@ -1,5 +1,4 @@
 {% extends 'financial_app_test/base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -7,7 +6,41 @@
   <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
     {% csrf_token %}
     <fieldset class="form-group">
-      {{ form|crispy}}
+      <div class="row">
+        {{form.username}}
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        {{form.password}}
+      </div>
+      <div class="col-lg-6 col-md-12">
+        {{form.confirm_password}}
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          {{form.first_name}}
+        </div>
+        <div class="col-lg-6 col-md-12">
+          {{form.last_name}}
+        </div>
+      </div>
+      <div class="row">
+          {{form.email_address}}
+      </div>
+      <div class="row">
+          {{form.birth_date}}
+      </div>
+      <div class="row">
+        {{form.phone_no}}
+    </div>
+    <div class="row">
+      {{form.city}}
+  </div>
+  <div class="row">
+    {{form.country}}
+</div>
+
     </fieldset>
     <center>
       <button style="background: black; padding:2%; font-size: 2rem; color:white;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-check"></span> &nbsp; sign up</button>
